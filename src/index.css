@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Kanit", sans-serif;
+  --color-bg-primary: var(--bg-primary);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-border-subtle: var(--border-subtle);
+}
+
+@layer base {
+  :root {
+    --bg-primary: #F3F4F6;
+    --text-primary: #0C0C0C;
+    --text-muted: rgba(12, 12, 12, 0.6);
+    --border-subtle: rgba(12, 12, 12, 0.15);
+    --hero-grad-start: #374151;
+    --hero-grad-end: #000000;
+  }
+  
+  .dark {
+    --bg-primary: #0C0C0C;
+    --text-primary: #D7E2EA;
+    --text-muted: rgba(215, 226, 234, 0.6);
+    --border-subtle: rgba(215, 226, 234, 0.15);
+    --hero-grad-start: #646973;
+    --hero-grad-end: #BBCCD7;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body, #root {
+    background-color: var(--bg-primary);
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+}
+
+@layer utilities {
+  .hero-heading {
+    background: linear-gradient(180deg, var(--hero-grad-start) 0%, var(--hero-grad-end) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
