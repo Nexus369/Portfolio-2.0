@@ -42,40 +42,45 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
       key="preloader"
       initial={{ y: 0 }}
       exit={{ y: "-100%", transition: { duration: 1, ease: [0.76, 0, 0.24, 1] } }}
-      className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-bg-primary transition-colors duration-500"
+      className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-text-primary transition-colors duration-500"
     >
-      <div className="relative flex flex-col items-center" style={{ perspective: "1000px" }}>
-        {/* 3D Spinning Rings */}
-        <motion.div
-          animate={{ rotateX: [0, 360], rotateY: [0, 360], rotateZ: [0, 180] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          className="w-32 h-32 md:w-48 md:h-48 rounded-full border-t-2 border-l-2 border-text-primary opacity-30 shadow-[0_0_30px_var(--border-subtle)] transition-colors duration-500"
-          style={{ transformStyle: "preserve-3d" }}
-        />
-        <motion.div
-          animate={{ rotateX: [360, 0], rotateY: [360, 0], rotateZ: [180, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-          className="absolute top-0 w-32 h-32 md:w-48 md:h-48 rounded-full border-b-2 border-r-2 border-[var(--hero-grad-start)] opacity-50 transition-colors duration-500"
-          style={{ transformStyle: "preserve-3d" }}
-        />
-        
-        {/* Progress Text */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-black text-[clamp(2rem,4vw,3.5rem)] text-transparent bg-clip-text bg-gradient-to-br from-text-primary to-text-muted tracking-tighter transition-colors duration-500">
-            {progress}
-            <span className="text-xl md:text-2xl font-light opacity-50 ml-1">%</span>
-          </span>
-        </div>
+      <div className="absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 overflow-hidden">
+         <motion.div 
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+            className="text-bg-primary uppercase tracking-widest text-sm md:text-lg font-medium"
+         >
+           Portfolio ©2026
+         </motion.div>
+         <motion.div 
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            transition={{ duration: 1, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+            className="text-bg-primary/60 uppercase tracking-widest text-xs md:text-sm mt-2"
+         >
+           Loading Experience
+         </motion.div>
       </div>
-      
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="mt-16 text-text-muted uppercase tracking-[0.3em] sm:tracking-[0.5em] text-xs sm:text-sm font-light animate-pulse transition-colors duration-500"
-      >
-        Initializing System...
-      </motion.div>
+
+      <div className="absolute bottom-6 sm:bottom-10 right-6 sm:right-10 flex items-end overflow-hidden">
+        <motion.span 
+          initial={{ y: "100%" }}
+          animate={{ y: "0%" }}
+          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+          className="font-black text-[clamp(4rem,10vw,8rem)] text-bg-primary leading-none tracking-tighter"
+        >
+          {progress}
+        </motion.span>
+        <motion.span 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-2xl md:text-4xl text-bg-primary/50 font-light mb-2 sm:mb-4 ml-1 sm:ml-2"
+        >
+          %
+        </motion.span>
+      </div>
     </motion.div>
   );
 }

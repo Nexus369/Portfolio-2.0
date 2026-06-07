@@ -1,4 +1,5 @@
 import { FadeIn } from "../ui/FadeIn";
+import { ScrollTextReveal } from "../ui/ScrollTextReveal";
 
 const services = [
   {
@@ -34,7 +35,7 @@ export function ServicesSection() {
       <div className="max-w-5xl mx-auto flex flex-col">
         <FadeIn delay={0} y={30} className="w-full text-center mb-16 sm:mb-20 md:mb-28">
           <h2 className="text-bg-primary font-black uppercase text-[clamp(3rem,12vw,160px)] leading-none transition-colors duration-500">
-            Expertise
+            <ScrollTextReveal text="Expertise" />
           </h2>
         </FadeIn>
 

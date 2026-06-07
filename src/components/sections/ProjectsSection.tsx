@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState, type MouseEvent } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { FadeIn } from "../ui/FadeIn";
+import { ScrollTextReveal } from "../ui/ScrollTextReveal";
 import { LiveProjectButton } from "../ui/LiveProjectButton";
 import { Tilt3D } from "../ui/Tilt3D";
 
@@ -49,8 +50,8 @@ export function ProjectsSection() {
   return (
     <section id="projects" ref={container} className="bg-bg-primary rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative px-5 sm:px-8 md:px-10 py-24 sm:py-32 md:py-40 transition-colors duration-500">
       <FadeIn delay={0} y={30} className="w-full text-center mb-16 sm:mb-20 md:mb-28">
-        <h2 className="hero-heading font-black uppercase text-[clamp(3rem,12vw,160px)] leading-none">
-          Project
+        <h2 className="text-text-primary font-black uppercase text-[clamp(3rem,12vw,160px)] leading-none">
+          <ScrollTextReveal text="PROJECTS" />
         </h2>
       </FadeIn>
 
@@ -66,15 +67,36 @@ export function ProjectsSection() {
   );
 }
 
+
+
 function Card({ proj, i, progress, range, targetScale }: { proj: any, i: number, progress: MotionValue<number>, range: [number, number], targetScale: number }) {
   const scale = useTransform(progress, range, [1, targetScale]);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
     <div className="h-[85vh] flex items-center justify-center sticky top-24 md:top-32" style={{ top: `calc(6rem + ${i * 28}px)` }}>
       <motion.div 
         style={{ scale }}
-        className="w-full h-full max-h-[85vh] bg-bg-primary rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-border-subtle p-4 sm:p-6 md:p-8 flex flex-col shadow-xl origin-top transition-colors duration-500"
+        onMouseMove={handleMouseMove}
+        className="interactive w-full h-full max-h-[85vh] bg-bg-primary rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border border-border-subtle p-4 sm:p-6 md:p-8 flex flex-col shadow-xl origin-top transition-colors duration-500 relative overflow-hidden group"
       >
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 md:mb-10 w-full px-2 sm:px-4 gap-4 sm:gap-0">
+        {/* Spotlight overlay */}
+        <motion.div
+          className="pointer-events-none absolute -inset-px rounded-[40px] sm:rounded-[50px] md:rounded-[60px] opacity-0 transition duration-300 group-hover:opacity-100"
+          animate={{
+            background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.06), transparent 40%)`
+          }}
+        />
+
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 md:mb-10 w-full px-2 sm:px-4 gap-4 sm:gap-0 relative z-10">
            <div className="flex items-center gap-4 sm:gap-6 md:gap-10">
              <span className="font-black text-text-primary text-[clamp(3rem,10vw,140px)] leading-none transition-colors duration-500">{proj.num}</span>
              <div className="flex flex-col">
@@ -82,12 +104,12 @@ function Card({ proj, i, progress, range, targetScale }: { proj: any, i: number,
                <h3 className="text-text-primary font-medium uppercase text-[clamp(1.2rem,3vw,3rem)] leading-tight transition-colors duration-500">{proj.title}</h3>
              </div>
            </div>
-           <a href="https://www.linkedin.com/in/jasbir-singh-monga-240967306/details/projects/" target="_blank" rel="noopener noreferrer">
+           <a href="https://www.linkedin.com/in/jasbir-singh-monga-240967306/details/projects/" target="_blank" rel="noopener noreferrer" className="interactive">
              <LiveProjectButton />
            </a>
         </div>
 
-        <div className="flex gap-4 sm:gap-6 w-full flex-1 overflow-hidden">
+        <div className="flex gap-4 sm:gap-6 w-full flex-1 overflow-hidden relative z-10">
           <Tilt3D depth={10} className="flex flex-col w-[40%] gap-4 sm:gap-6 h-full">
              <img src={proj.images.col1top} className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]" style={{ height: "clamp(130px, 16vw, 230px)" }} alt="Project image" />
              <img src={proj.images.col1bot} className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]" style={{ height: "clamp(160px, 22vw, 340px)", flex: 1 }} alt="Project image" />

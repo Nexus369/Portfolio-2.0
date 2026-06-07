@@ -1,6 +1,7 @@
 import { FadeIn } from "../ui/FadeIn";
 import { ContactButton } from "../ui/ContactButton";
 import { AnimatedText } from "../ui/AnimatedText";
+import { ScrollTextReveal } from "../ui/ScrollTextReveal";
 
 export function AboutSection() {
   return (
@@ -52,15 +53,15 @@ export function AboutSection() {
 
       <div className="flex flex-col items-center justify-center z-10 w-full max-w-[800px]">
         <FadeIn delay={0} y={40} className="w-full text-center">
-          <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-[clamp(3rem,12vw,160px)]">
-            About me
+          <h2 className="text-text-primary font-black uppercase leading-none tracking-tight text-[clamp(2rem,6vw,90px)]">
+            <ScrollTextReveal text="THE MAD SCIENTIST" />
           </h2>
         </FadeIn>
 
         <div className="flex flex-col items-center mt-10 sm:mt-14 md:mt-16 gap-16 sm:gap-20 md:gap-24">
           <AnimatedText 
-            text="With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!"
-            className="text-text-primary font-medium text-center leading-relaxed max-w-[560px] text-[clamp(1rem,2vw,1.35rem)]"
+            text="I talk to machines so they can talk to you. As an embedded systems engineer, I breathe C++ and sweat solder. From resurrecting bricked microcontrollers to building autonomous IoT beasts that live in the cloud, I bend hardware to my will and write code that makes electrons dance. If it has a chip, I can make it smart. If it doesn't, I'll put a chip in it. Let's build something insane together!"
+            className="text-text-primary font-medium text-center leading-relaxed max-w-[600px] text-[clamp(1rem,2vw,1.35rem)]"
           />
           
           <FadeIn delay={0.2} y={30}>

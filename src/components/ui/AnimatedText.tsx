@@ -7,7 +7,7 @@ export function AnimatedText({ text, className }: { text: string; className?: st
   
   const { scrollYProgress } = useScroll({
     target: container,
-    offset: ["start 0.8", "end 0.2"]
+    offset: ["start 0.95", "start 0.2"]
   });
 
   const words = text.split(" ");
@@ -32,7 +32,7 @@ const Word = ({ word, progress, range }: { word: string; progress: MotionValue<n
   const step = amount / characters.length;
 
   return (
-    <span className="relative mr-1.5 sm:mr-2 md:mr-2.5">
+    <span className="relative inline-block mr-1.5 sm:mr-2 md:mr-2.5">
       {characters.map((char, i) => {
         const start = range[0] + (i * step);
         const end = range[0] + (step * (i + 1));
@@ -46,12 +46,18 @@ const Word = ({ word, progress, range }: { word: string; progress: MotionValue<n
 };
 
 const Character = ({ char, progress, range }: { char: string; progress: MotionValue<number>; range: [number, number] }) => {
-  const opacity = useTransform(progress, range, [0.2, 1]);
+  const opacity = useTransform(progress, range, [0.1, 1]);
+  const y = useTransform(progress, range, [12, 0]);
+  const rotateX = useTransform(progress, range, [30, 0]);
+  const filter = useTransform(progress, range, ["blur(4px)", "blur(0px)"]);
   
   return (
-    <span className="relative inline-block">
+    <span className="relative inline-block" style={{ perspective: "1000px" }}>
       <span className="invisible">{char}</span>
-      <motion.span style={{ opacity }} className="absolute left-0 top-0 text-inherit transition-colors duration-500">
+      <motion.span 
+        style={{ opacity, y, rotateX, filter, transformOrigin: "bottom" }} 
+        className="absolute left-0 top-0 text-inherit"
+      >
         {char}
       </motion.span>
     </span>

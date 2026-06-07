@@ -1,24 +1,25 @@
 import { FadeIn } from "../ui/FadeIn";
-import { ContactButton } from "../ui/ContactButton";
 import { AnimatedText } from "../ui/AnimatedText";
+import { ScrollTextReveal } from "../ui/ScrollTextReveal";
+import HardwareConsole from "../ui/hardware-console";
 
 export function ContactSection() {
   return (
     <section id="contact" className="bg-bg-primary relative z-20 px-5 sm:px-8 md:px-10 py-24 sm:py-32 md:py-40 flex flex-col items-center justify-center border-t border-border-subtle transition-colors duration-500">
       <FadeIn delay={0} y={30} className="w-full text-center mb-10 sm:mb-16">
-        <h2 className="hero-heading font-black uppercase text-[clamp(3rem,12vw,160px)] leading-none">
-          Let's Talk
+        <h2 className="text-text-primary font-black uppercase text-[clamp(3rem,12vw,160px)] leading-none">
+          <ScrollTextReveal text="LET'S TALK" />
         </h2>
       </FadeIn>
       
-      <div className="flex flex-col items-center max-w-2xl text-center gap-12 sm:gap-16">
+      <div className="flex flex-col items-center w-full max-w-4xl text-center gap-12 sm:gap-16">
         <AnimatedText 
           text="Got a project in mind? I'm always open to discussing new opportunities, creative collaborations, or just chatting about embedded systems and IoT."
-          className="text-text-primary font-light text-[clamp(1rem,2vw,1.5rem)] leading-relaxed transition-colors duration-500"
+          className="text-text-primary font-light text-[clamp(1rem,2vw,1.5rem)] leading-relaxed transition-colors duration-500 max-w-2xl mx-auto"
         />
         
-        <FadeIn delay={0.2} y={30}>
-          <ContactButton className="px-10 py-4 md:px-14 md:py-5 text-sm md:text-lg pointer-events-auto" />
+        <FadeIn delay={0.2} y={30} className="w-full">
+          <HardwareConsole />
         </FadeIn>
       </div>
 

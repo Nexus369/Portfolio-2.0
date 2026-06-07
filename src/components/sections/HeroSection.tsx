@@ -1,14 +1,15 @@
 import { FadeIn } from "../ui/FadeIn";
 import { Magnet } from "../ui/Magnet";
 import { Tilt3D } from "../ui/Tilt3D";
+import { StaggeredText } from "../ui/StaggeredText";
 
 export function HeroSection() {  return (
     <section className="h-screen flex flex-col overflow-x-clip relative">
       <FadeIn delay={0} y={-20} as="nav" className="flex justify-between px-6 md:px-10 pt-6 md:pt-8 text-text-primary font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.4rem]">
-        <a href="#about" className="hover:opacity-70 transition-opacity duration-200">About</a>
-        <a href="#services" className="hover:opacity-70 transition-opacity duration-200">Expertise</a>
-        <a href="#projects" className="hover:opacity-70 transition-opacity duration-200">Projects</a>
-        <a href="#contact" className="hover:opacity-70 transition-opacity duration-200">Contact</a>
+        <a href="#about" className="interactive block p-2"><StaggeredText text="About" /></a>
+        <a href="#services" className="interactive block p-2"><StaggeredText text="Expertise" /></a>
+        <a href="#projects" className="interactive block p-2"><StaggeredText text="Projects" /></a>
+        <a href="#contact" className="interactive block p-2"><StaggeredText text="Contact" /></a>
       </FadeIn>
 
       <div className="flex-1 flex flex-col justify-between pt-10">
